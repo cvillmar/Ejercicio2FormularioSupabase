@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E2 — Formulario + BBDD cloud (Supabase)</title>
+    <meta
+      name="description"
+      content="Formulario con validación en tiempo real y persistencia en Supabase (vanilla JS)."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <!-- Supabase JS (UMD) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="./app.js"></script>
+  </head>
+
+  <body class="page">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="header">
+      <div class="header__inner">
+        <div class="header__brand">
+          <h1 class="header__title">E2: Formulario + BBDD cloud (Supabase)</h1>
+          <p class="header__subtitle">Vanilla HTML/CSS/JS</p>
+        </div>
+        <div class="header__meta" aria-label="Estado de conexión">
+          <span class="pill pill--neutral" id="connBadge"
+            >Supabase: pendiente</span
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="main" id="main">
+      <div class="layout">
+        <section class="card card--form" aria-labelledby="formTitle">
+          <div class="card__header">
+            <h2 class="card__title" id="formTitle">Nueva solicitud</h2>
+            <p class="card__hint">
+              Rellena los campos para enviar la solicitud.
+            </p>
+          </div>
+
+          <div
+            class="notice notice--hidden"
+            id="formNotice"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <form class="form" id="requestForm" novalidate>
+            <div class="form__row">
+              <label class="form__label" for="title">Título</label>
+              <input
+                class="form__control"
+                id="title"
+                name="title"
+                type="text"
+                minlength="5"
+                maxlength="60"
+                autocomplete="off"
+                required
+                aria-describedby="titleHelp titleError"
+              />
+              <div class="form__help" id="titleHelp">
+                Entre 5 y 60 caracteres.
+              </div>
+              <div class="form__error" id="titleError" role="alert"></div>
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="description">Descripción</label>
+              <textarea
+                class="form__control form__control--textarea"
+                id="description"
+                name="description"
+                rows="5"
+                minlength="20"
+                maxlength="500"
+                required
+                aria-describedby="descHelp descError"
+              ></textarea>
+              <div class="form__help" id="descHelp">
+                Entre 20 y 500 caracteres.
+              </div>
+              <div class="form__error" id="descError" role="alert"></div>
+            </div>
+
+            <div class="form__grid">
+              <div class="form__row">
+                <label class="form__label" for="category">Categoría</label>
+                <select
+                  class="form__control"
+                  id="category"
+                  name="category"
+                  required
+                  aria-describedby="catError"
+                >
+                  <option value="">Selecciona…</option>
+                  <option value="Soporte">Soporte</option>
+                  <option value="Incidencia">Incidencia</option>
+                  <option value="Mejora">Mejora</option>
+                  <option value="Otra">Otra</option>
+                </select>
+                <div class="form__error" id="catError" role="alert"></div>
+              </div>
+
+              <div class="form__row">
+                <label class="form__label" for="priority"
+                  >Prioridad (1–5)</label
+                >
+                <input
+                  class="form__control"
+                  id="priority"
+                  name="priority"
+                  type="number"
+                  min="1"
+                  max="5"
+                  step="1"
+                  inputmode="numeric"
+                  required
+                  aria-describedby="prioHelp prioError"
+                />
+                <div class="form__help" id="prioHelp">1 (baja) — 5 (alta)</div>
+                <div class="form__error" id="prioError" role="alert"></div>
+              </div>
+            </div>
+
+            <div class="form__row">
+              <label class="form__label" for="email">Email</label>
+              <input
+                class="form__control"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                aria-describedby="emailHelp emailError"
+              />
+              <div class="form__help" id="emailHelp">
+                Se usará para mostrar tus solicitudes.
+              </div>
+              <div class="form__error" id="emailError" role="alert"></div>
+            </div>
+
+            <div class="form__actions">
+              <button
+                class="button button--primary"
+                id="submitBtn"
+                type="submit"
+                disabled
+              >
+                Enviar solicitud
+              </button>
+              <button
+                class="button button--ghost button--hidden"
+                id="retryBtn"
+                type="button"
+              >
+                Reintentar envío
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card card--list" aria-labelledby="listTitle">
+          <div class="card__header">
+            <h2 class="card__title" id="listTitle">Mis solicitudes</h2>
+            <p class="card__hint">
+              Ordenadas por fecha, de más recientes a más antiguas.
+            </p>
+          </div>
+
+          <div class="list" id="requestsList" aria-live="polite">
+            <div class="list__empty" id="listEmpty">
+              Introduce un email válido para ver tus solicitudes.
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+supabase: ySl6AARIvBqNI4R8
+url: https://dzpgsrjwmqarungktypo.supabase.co
+api_key: sb_publishable_ih1FMr61w05oQG_bHeNbgQ_Q80xd0Hv

@@ -1,0 +1,433 @@
+/* =========================================================
+   Base / Tokens
+   ========================================================= */
+:root {
+  --bg: #0b1220;
+  --surface: #111b2e;
+  --surface-2: #0f172a;
+  --text: #e8eefc;
+  --muted: #a7b3d2;
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  --primary: #4f7cff;
+  --primary-2: #3c66e6;
+  --danger: #ff4d4d;
+  --success: #2bd576;
+  --warning: #ffcc66;
+
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 18px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --font:
+    ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background:
+    radial-gradient(
+      1200px 600px at 10% 0%,
+      rgba(79, 124, 255, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 90% 10%,
+      rgba(43, 213, 118, 0.16),
+      transparent 55%
+    ),
+    linear-gradient(180deg, var(--bg), #070b14 70%);
+  line-height: 1.45;
+}
+
+/* =========================================================
+   Page / Layout
+   ========================================================= */
+.page {
+  min-height: 100%;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+}
+
+.header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(17, 27, 46, 0.65);
+  backdrop-filter: blur(10px);
+}
+
+.header__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: 0.2px;
+}
+
+.header__subtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.main {
+  padding: var(--space-6) var(--space-4);
+}
+
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 920px) {
+  .layout {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: start;
+  }
+}
+
+/* =========================================================
+   Card
+   ========================================================= */
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 27, 46, 0.92),
+    rgba(17, 27, 46, 0.82)
+  );
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card__header {
+  padding: var(--space-5) var(--space-5) var(--space-3);
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.card__hint {
+  margin: var(--space-2) 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* =========================================================
+   Notice (success/error)
+   ========================================================= */
+.notice {
+  margin: 0 var(--space-5) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text);
+}
+
+.notice--hidden {
+  display: none;
+}
+
+.notice--success {
+  border-color: rgba(43, 213, 118, 0.35);
+  background: rgba(43, 213, 118, 0.12);
+}
+
+.notice--error {
+  border-color: rgba(255, 77, 77, 0.35);
+  background: rgba(255, 77, 77, 0.12);
+}
+
+/* =========================================================
+   Pills
+   ========================================================= */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.pill--neutral {
+  color: var(--muted);
+}
+
+.pill--ok {
+  border-color: rgba(43, 213, 118, 0.35);
+  color: rgba(232, 238, 252, 0.95);
+}
+
+.pill--bad {
+  border-color: rgba(255, 77, 77, 0.35);
+  color: rgba(232, 238, 252, 0.95);
+}
+
+/* =========================================================
+   Form (BEM)
+   ========================================================= */
+.form {
+  padding: 0 var(--space-5) var(--space-5);
+}
+
+.form__row {
+  margin-bottom: var(--space-4);
+}
+
+.form__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 520px) {
+  .form__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+}
+
+.form__control {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(7, 11, 20, 0.55);
+  color: var(--text);
+  padding: 12px 12px;
+  outline: none;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.form__control--textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form__control:focus {
+  border-color: rgba(79, 124, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.18);
+}
+
+.form__control--invalid {
+  border-color: rgba(255, 77, 77, 0.65);
+  box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.12);
+}
+
+.form__help {
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.form__error {
+  min-height: 18px;
+  margin-top: var(--space-2);
+  color: rgba(255, 144, 144, 0.95);
+  font-size: 0.9rem;
+}
+
+.form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  margin-top: var(--space-5);
+}
+
+.form__footnote {
+  margin: var(--space-4) 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.button {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.65);
+  color: var(--text);
+  transition:
+    transform 100ms ease,
+    background 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.button--primary {
+  border-color: rgba(79, 124, 255, 0.55);
+  background: linear-gradient(
+    180deg,
+    rgba(79, 124, 255, 0.9),
+    rgba(60, 102, 230, 0.85)
+  );
+}
+
+.button--primary:hover:not(:disabled) {
+  background: linear-gradient(
+    180deg,
+    rgba(79, 124, 255, 1),
+    rgba(60, 102, 230, 0.95)
+  );
+  border-color: rgba(79, 124, 255, 0.8);
+}
+
+.button--ghost {
+  background: rgba(15, 23, 42, 0.25);
+}
+
+.button--ghost:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.button--hidden {
+  display: none;
+}
+
+/* =========================================================
+   List
+   ========================================================= */
+.list {
+  padding: 0 var(--space-5) var(--space-5);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.list__empty {
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: var(--muted);
+  background: rgba(15, 23, 42, 0.25);
+}
+
+.item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(15, 23, 42, 0.25);
+  padding: var(--space-4);
+}
+
+.item__head {
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.item__title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.item__meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.item__desc {
+  margin: var(--space-3) 0 0;
+  color: rgba(232, 238, 252, 0.93);
+  white-space: pre-wrap;
+}
+
+.item__badges {
+  margin-top: var(--space-3);
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: rgba(232, 238, 252, 0.92);
+  background: rgba(7, 11, 20, 0.35);
+}
+
+.badge--prio {
+  border-color: rgba(255, 204, 102, 0.35);
+}
+
+.badge--cat {
+  border-color: rgba(79, 124, 255, 0.35);
+}
